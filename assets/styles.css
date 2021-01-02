@@ -1,0 +1,79 @@
+/* 
+Pallette Colors
+
+used as suggested by Shopify Polaris: https://polaris.shopify.com/design/colors#navigation
+
+Main Indigo #5C6AC4
+Secondary Yellow #EEC200
+Success #50B83C
+Failure #DE3618
+
+*/
+/* Shopify Polaris Typography Import Start */
+html {
+    /* Load system fonts */
+    font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI,
+      Roboto, Helvetica Neue, sans-serif;
+  
+    /* Make type rendering look crisper */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Disable auto-enlargement of small text in Safari */
+    text-size-adjust: 100%;
+  
+    /* Enable kerning and optional ligatures */
+    text-rendering: optimizeLegibility;
+  }
+  
+  /**
+   * Form elements render using OS defaults,
+   * so font-family inheritance must be specifically declared
+   */
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit;
+  }
+/* Shopify Polaris Typography Import End */
+
+* {
+    margin: 0;
+    padding: 0;
+    }
+
+
+
+body {
+    background-color: #F4F5FA;
+    color:#3E4155;
+}
+
+header {
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+header h1 {
+    display: flex;
+    justify-content: center;
+}
+
+header p {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    background-color: #5C6AC4;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+
+}
