@@ -39,6 +39,8 @@ html {
   }
 /* Shopify Polaris Typography Import End */
 
+
+/* Shared styles */
 * {
     margin: 0;
     padding: 0;
@@ -59,21 +61,194 @@ header {
 }
 
 header h1 {
-    display: flex;
-    justify-content: center;
+    font-size: 3em;
+    align-self: center;
+    padding: 12px;
 }
 
 header p {
-    display: flex;
-    justify-content: center;
+    align-self: center;
 }
 
 button {
     background-color: #5C6AC4;
     color: white;
     padding: 12px;
-    border-radius: 10px;
+    border-radius: 8px;
     border: none;
     font-size: 16px;
 
+}
+
+/* Shared Classes */
+
+.card {
+    padding: 4px;
+    border: 1px solid #B3BCF5;
+    border-radius: 8px;
+    box-shadow: 4px 4px 4px  #C4CDD5 ;
+    margin: 4px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+/* Search Bar Specific CSS */
+
+.search-bar {
+    padding: 8px;
+}
+
+.search-bar input {
+    padding: 8px;
+    font-size: 1.2em;
+    border-radius: 8px;
+}
+
+.search-bar label {
+    font-size: 1.2em;
+}
+
+
+
+
+
+
+/* Nomination Area Specific CSS */
+.movie-nominations {
+    flex-flow: column wrap;
+    padding: 12px
+}
+
+.movie-nominations h2 {
+    align-self: center;
+    padding: 12px;
+}
+
+#movieNominationCards {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
+.nomination-card {
+    flex-direction: column;
+    height: 200px;
+}
+
+.nomination-card p {
+    align-self: center;
+}
+
+.nomination-card button {
+    background-color: #FEAD9A;
+    color: #BF0711;
+    outline-color: #BF0711;
+}
+
+
+
+
+
+
+/* Search Results Specific CSS */
+.results {
+    flex-flow:column wrap;
+    padding: 12px;
+    margin-top: 12px;
+
+}
+
+.results h2 {
+    align-self: center;
+    margin: 12px;
+}
+
+.movie-card-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.movie-card {
+    align-self: center;
+    /* display: flex;
+    justify-content: center; */
+    flex-flow: column wrap;
+    align-self: center;
+    width: 250px;
+}
+.movie-card h2 {
+    align-self: center;
+    padding: 4px;
+}
+
+.movie-card p {
+    align-self: center;
+    padding: 4px;
+}
+
+.movie-card img {
+    display: flex;
+    justify-content: inherit;
+    padding: 12px;
+}
+
+.movie-card button {
+    display: flex;
+    justify-content: inherit;
+    margin: 12px;
+}
+
+/* No Results Display */
+
+.noMovie {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+    max-width: 400px;
+    padding: 12px;
+}
+
+
+/* Footer Specific CSS */
+
+footer {
+    display:flex;
+   flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+}
+
+footer h3 {
+    align-self: center;
+    margin-top: 24px;
+}
+
+footer a {
+    align-self: center;
+}
+
+footer img { 
+    max-width: 400px;
+    margin: 40px
+}
+
+footer p {
+    display: flex;
+    justify-content: center;
+    background-color: #FFEA8A;
+    color: #8A6116;
+    padding: 24px;
 }
