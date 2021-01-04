@@ -77,7 +77,18 @@ button {
     border-radius: 8px;
     border: none;
     font-size: 16px;
+    box-shadow: 0 5px #666;
 
+}
+
+button:active {
+    box-shadow: 0 1px #666;
+    transform: translateY(4px);
+    outline: none;
+}
+
+button:focus {
+    outline: none;
 }
 
 /* Shared Classes */
@@ -160,10 +171,6 @@ button {
 .results h2 {
     align-self: center;
     margin: 12px;
-}
-
-.movie-card-container {
-    flex-flow: row wrap;
 }
 
 .movie-card {
