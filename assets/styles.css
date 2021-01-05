@@ -141,6 +141,7 @@ button:focus {
 }
 
 .movie-nominations h2 {
+    text-align: center;
     align-self: center;
     padding: 12px;
 }
@@ -176,10 +177,13 @@ button:focus {
 .movie-card {
     flex-flow: column wrap;
     align-self: center;
+    height: 420px;
     width: 250px;
 }
-.movie-card h2 {
-    align-self: center;
+.movie-card h3 {
+    align-content: center;
+   
+    text-align: center;
     padding: 4px;
 }
 
@@ -191,7 +195,10 @@ button:focus {
 .movie-card img {
     display: flex;
     justify-content: inherit;
+    align-self: center;
     padding: 12px;
+    width: 150px;
+    height: 250px;
 }
 
 .movie-card button {
