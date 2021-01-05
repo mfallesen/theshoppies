@@ -1,5 +1,5 @@
+let movieNominations = [];
 
-// be sure to replace the search term with the input field value
 
 
 const searchBtn = document.getElementById('searchForMovie')
@@ -14,17 +14,6 @@ const debounce = (callback, delay) => {
         timeout = setTimeout(next, delay)
     }
 }
-
-//   const debounce = (callback, time) => {
-//     let interval;
-//     return (...args) => {
-//       clearTimeout(interval);
-//       interval = setTimeout(() => {
-//         interval = null;
-//         callback(...args);
-//       }, time);
-//     };
-//   };
 
 async function findMovie(event) {
     event.preventDefault()
@@ -48,6 +37,7 @@ async function findMovie(event) {
                 // loop through options and make cards for each
                 for (let i = 0; i < options.length; i++) {
 
+                    const cardId = 'nominateMovie' + i;
                     const title = options[i].Title;
                     const year = options[i].Year;
                     let poster = options[i].Poster;
@@ -62,10 +52,13 @@ async function findMovie(event) {
                                         <h3 id="movieNo">${title}</h2>
                                         <p id="movieYear">${year}</p>
                                         <img src="${poster}" alt="${title} poster" id="moviePoster">
-                                        <button id="nominateMovie">Nominate me!</button>
+                                        <button id="${cardId}">Nominate me!</button>
                                     </div>`
 
                     resultBox.insertAdjacentHTML('beforeend', newCard);
+
+                    const nominateButton = document.getElementById(`${cardId}`)
+                    nominateButton.addEventListener('click', nominate)
 
                 }
             } else {
@@ -84,31 +77,33 @@ async function findMovie(event) {
         })
 }
 
-let searchBox = document.getElementById('searchBox')
+// Nomination functions
+function nominate() {
+    const nominee = this.parentElement;
+    const nomineeTitle = nominee.getElementsByTagName('h3')[0].childNodes[0].data;
+    const nomineeYear = nominee.getElementsByTagName('p')[0].childNodes[0].data;
+    const nomineePoster = nominee.getElementsByTagName('img')[0].currentSrc;
+    console.log(nomineeTitle);
+    console.log(nomineeYear);
+    console.log(nomineePoster);
+
+    const nomineeCard = {
+        title: nomineeTitle,
+        year: nomineeYear,
+        poster: nomineePoster,
+    }
+
+    movieNominations.push(nomineeCard)
+
+    console.log(movieNominations);
+}
 
 
+const searchBox = document.getElementById('searchBox')
+
+
+
+
+// the debounced Event handler that works on in the Search field
 const debouncedHandler = debounce(findMovie, 1000)
-
-
-
-
-
 searchBox.addEventListener('input', debouncedHandler)
-
-
-
-
-
-
-
-
-// function bounce(evt) {
-//     debounce(findMovie(evt), 1000);
-// }
-
-
-// , (evt) => {
-//     console.log("eventlistener fire");
-//     debounce(findMovie(evt), 1000);
-// }
-// searchBtn.onclick = findMovie;
