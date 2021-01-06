@@ -54,12 +54,25 @@ async function findMovie(event) {
                         poster = "./assets/images/picture-not-available-clipart-12.jpg"
                     }
 
+
+                    let button = '';
+                    if (movieNominations.movieID === movieDBId) {
+                        button = `<button id="${cardId}" class="disabled" disabled>Nominate me!</button>`
+                    } else {
+                        button = `<button id="${cardId}">Nominated!</button>`
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
                     // CREATE NEW MOVIE CARD
                     const newCard = `<div class="flex-center card movie-card">
                                         <h3 id="movieNo">${title}</h2>
                                         <p id="movieYear">${year}</p>
                                         <img src="${poster}" alt="${title} poster" id="moviePoster">
-                                        <button id="${cardId}">Nominate me!</button>
+                                        ${button}
                                     </div>`
 
                     resultBox.insertAdjacentHTML('beforeend', newCard);
@@ -98,7 +111,7 @@ function nominate() {
 
     const movieID = movieIds[nomineeID];
     
-    console.log(nominee);
+    console.log('nominee: ', nominee);
     console.log(movieID);
     // console.log(nomineeTitle);
     // console.log(nomineeYear);
@@ -112,6 +125,13 @@ function nominate() {
     }
 
     movieNominations.push(nomineeCard)
+
+    nominee.getElementsByTagName('button')[0].setAttribute("class", "disabled")
+    nominee.getElementsByTagName('button')[0].setAttribute("disabled", "")
+
+    console.log(nominee.getElementsByTagName('button'))
+
+
 
     console.log(movieNominations);
 }
