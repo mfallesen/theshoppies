@@ -114,10 +114,14 @@ button:focus {
     flex-flow: row wrap;
 }
 
-.col-wrap{
+.col-wrap {
     flex-flow: column wrap;
 }
 
+.disabled {
+    background-color: #B3BCF5;
+    cursor: not-allowed;
+}
 
 /* Search Bar Specific CSS */
 
