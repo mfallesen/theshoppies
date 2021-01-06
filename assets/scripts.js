@@ -36,15 +36,27 @@ async function findMovie(event) {
                 // CLEAR EXISTING ID LIST
                 movieIds = [];
 
+                movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
+                console.log(movieNominations);
+
+                let idArr = [];
+
+                for (let j = 0; j < movieNominations.length; j++) {
+                    idArr.push(movieNominations[j].movieID);
+
+                }
+
+
+
                 // LOOP THROUGH OPTIONS AND DISPLAY A CARD FOR EACH
                 for (let i = 0; i < options.length; i++) {
-                    
+
                     // DATA USED FOR CARD CONSTRUCTION
                     const cardId = 'nominateMovie' + i;
                     const title = options[i].Title;
                     const year = options[i].Year;
                     let poster = options[i].Poster;
-                    
+
                     // DATA USED TO TRACK NOMINATIONS
                     const movieDBId = options[i].imdbID
                     movieIds.push(movieDBId)
@@ -55,21 +67,33 @@ async function findMovie(event) {
                         poster = "./assets/images/picture-not-available-clipart-12.jpg"
                     }
 
+                    
 
                     let button = '';
-                    if (movieNominations.movieID === movieDBId) {
-                        button = `<button id="${cardId}" class="disabled" disabled>Nominate me!</button>`
-                    } else {
-                        button = `<button id="${cardId}">Nominated!</button>`
+
+                    // idArr.forEach(() => {
+
+                    //     if (idArr[0] === movieDBId) {
+                    //         button = `<button id="${cardId}" class="disabled" disabled>Nominated!</button>`
+                    //     } else {
+                    //         button = `<button id="${cardId}">Nominate me!</button>`
+                    //     }
+
+                    // })
+
+                    for (let l = 0; l < array.length; l++) {
+                        const element = array[l];
+                        
                     }
-                    
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
+
+
                     // CREATE NEW MOVIE CARD
-                    const newCard = `<div class="flex-center card movie-card">
+                    const newCard = `<div class="flex-center card movie-card" data-identifier='${movieDBId}'>
                                         <h3 id="movieNo">${title}</h2>
                                         <p id="movieYear">${year}</p>
                                         <img src="${poster}" alt="${title} poster" id="moviePoster">
@@ -95,6 +119,10 @@ async function findMovie(event) {
                 resultBox.insertAdjacentHTML('beforeend', noMovie)
             }
 
+
+             // LOOP HERE AND ADD DISABLED PROPERTY AND CLASS TO THE DOM
+
+
         })
         .catch((err) => {
             console.error("Error: ", err);
@@ -115,7 +143,7 @@ function nominate() {
     const nomineeID = nomineeButtonID.charAt(nomineeButtonID.length - 1);
 
     const movieID = movieIds[nomineeID];
-    
+
     // console.log('nominee: ', nominee);
     // console.log(movieID);
     // console.log(nomineeTitle);
@@ -130,7 +158,7 @@ function nominate() {
     }
 
 
-    console.log('movienominations: ',movieNominations);
+    console.log('movienominations: ', movieNominations);
 
 
     movieNominations.push(nomineeCard)
@@ -140,6 +168,7 @@ function nominate() {
 
     nominee.getElementsByTagName('button')[0].setAttribute("class", "disabled")
     nominee.getElementsByTagName('button')[0].setAttribute("disabled", "")
+
 
 
 
