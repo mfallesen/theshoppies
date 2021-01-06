@@ -1,5 +1,5 @@
 let movieNominations = [];
-
+let movieIds = [];
 
 
 const searchBtn = document.getElementById('searchForMovie')
@@ -28,26 +28,33 @@ async function findMovie(event) {
     fetch(query_url)
         .then(response => response.json())
         .then((data) => {
-            // console.log(data);
             let options = data.Search;
-            // console.log(options);
+            console.log(options);
 
             if (options != undefined) {
+                // CLEAR EXISTING ID LIST
+                movieIds = [];
 
-                // loop through options and make cards for each
+                // LOOP THROUGH OPTIONS AND DISPLAY A CARD FOR EACH
                 for (let i = 0; i < options.length; i++) {
-
+                    
+                    // DATA USED FOR CARD CONSTRUCTION
                     const cardId = 'nominateMovie' + i;
                     const title = options[i].Title;
                     const year = options[i].Year;
                     let poster = options[i].Poster;
+                    
+                    // DATA USED TO TRACK NOMINATIONS
+                    const movieDBId = options[i].imdbID
+                    movieIds.push(movieDBId)
 
+
+                    // CHECK FOR EXISTING POSTER AND REPLACE WITH DEFAULT MISSING IMAGE IF NONE
                     if (poster === 'N/A') {
                         poster = "./assets/images/picture-not-available-clipart-12.jpg"
                     }
 
-                    console.log(resultBox);
-
+                    // CREATE NEW MOVIE CARD
                     const newCard = `<div class="flex-center card movie-card">
                                         <h3 id="movieNo">${title}</h2>
                                         <p id="movieYear">${year}</p>
@@ -57,11 +64,14 @@ async function findMovie(event) {
 
                     resultBox.insertAdjacentHTML('beforeend', newCard);
 
+                    // CREATE EVENT LISTENER FOR THE NEW BUTTON
                     const nominateButton = document.getElementById(`${cardId}`)
                     nominateButton.addEventListener('click', nominate)
 
                 }
+                console.log(movieIds);
             } else {
+                // DISPLAY ONLY IS NO MOVIE IS FOUND
                 const noMovie = `<div class="flex-center no-movie ">
                                     <h2>Sorry we cant seem to find the movie you're looking for. Please enjoy this gif of nicholas Cage instead
                                     </h2>
@@ -83,14 +93,22 @@ function nominate() {
     const nomineeTitle = nominee.getElementsByTagName('h3')[0].childNodes[0].data;
     const nomineeYear = nominee.getElementsByTagName('p')[0].childNodes[0].data;
     const nomineePoster = nominee.getElementsByTagName('img')[0].currentSrc;
-    console.log(nomineeTitle);
-    console.log(nomineeYear);
-    console.log(nomineePoster);
+    const nomineeButtonID = nominee.getElementsByTagName('button')[0].id;
+    const nomineeID = nomineeButtonID.charAt(nomineeButtonID.length - 1);
+
+    const movieID = movieIds[nomineeID];
+    
+    console.log(nominee);
+    console.log(movieID);
+    // console.log(nomineeTitle);
+    // console.log(nomineeYear);
+    // console.log(nomineePoster);
 
     const nomineeCard = {
         title: nomineeTitle,
         year: nomineeYear,
         poster: nomineePoster,
+        movieID: movieID,
     }
 
     movieNominations.push(nomineeCard)
