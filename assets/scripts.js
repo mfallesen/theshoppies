@@ -1,5 +1,6 @@
 let movieNominations = [];
 let movieIds = [];
+const storage = window.localStorage;
 
 
 const searchBtn = document.getElementById('searchForMovie')
@@ -47,7 +48,7 @@ async function findMovie(event) {
                     // DATA USED TO TRACK NOMINATIONS
                     const movieDBId = options[i].imdbID
                     movieIds.push(movieDBId)
-
+                    storage.setItem('movieIds', JSON.stringify(movieIds));
 
                     // CHECK FOR EXISTING POSTER AND REPLACE WITH DEFAULT MISSING IMAGE IF NONE
                     if (poster === 'N/A') {
@@ -82,7 +83,7 @@ async function findMovie(event) {
                     nominateButton.addEventListener('click', nominate)
 
                 }
-                console.log(movieIds);
+                // console.log(movieIds);
             } else {
                 // DISPLAY ONLY IS NO MOVIE IS FOUND
                 const noMovie = `<div class="flex-center no-movie ">
@@ -102,6 +103,10 @@ async function findMovie(event) {
 
 // Nomination functions
 function nominate() {
+
+    // console.log(storage.getItem('movieNominations'));
+
+    movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
     const nominee = this.parentElement;
     const nomineeTitle = nominee.getElementsByTagName('h3')[0].childNodes[0].data;
     const nomineeYear = nominee.getElementsByTagName('p')[0].childNodes[0].data;
@@ -111,8 +116,8 @@ function nominate() {
 
     const movieID = movieIds[nomineeID];
     
-    console.log('nominee: ', nominee);
-    console.log(movieID);
+    // console.log('nominee: ', nominee);
+    // console.log(movieID);
     // console.log(nomineeTitle);
     // console.log(nomineeYear);
     // console.log(nomineePoster);
@@ -124,12 +129,18 @@ function nominate() {
         movieID: movieID,
     }
 
+
+    console.log('movienominations: ',movieNominations);
+
+
     movieNominations.push(nomineeCard)
+    storage.setItem('movieNominations', JSON.stringify(movieNominations))
+
+
 
     nominee.getElementsByTagName('button')[0].setAttribute("class", "disabled")
     nominee.getElementsByTagName('button')[0].setAttribute("disabled", "")
 
-    console.log(nominee.getElementsByTagName('button'))
 
 
 
