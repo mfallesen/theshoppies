@@ -10,8 +10,7 @@ const debounce = (callback, delay) => {
     return (...args) => {
         const next = () =>
             callback(...args);
-        clearTimeout(timeout);
-        //1.   
+        clearTimeout(timeout); 
         timeout = setTimeout(next, delay)
     }
 }
@@ -39,12 +38,12 @@ async function findMovie(event) {
                 movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
                 console.log(movieNominations);
 
-                let idArr = [];
+                // let idArr = [];
 
-                for (let j = 0; j < movieNominations.length; j++) {
-                    idArr.push(movieNominations[j].movieID);
+                // for (let j = 0; j < movieNominations.length; j++) {
+                //     idArr.push(movieNominations[j].movieID);
 
-                }
+                // }
 
 
 
@@ -76,22 +75,22 @@ async function findMovie(event) {
                     //     if (idArr[0] === movieDBId) {
                     //         button = `<button id="${cardId}" class="disabled" disabled>Nominated!</button>`
                     //     } else {
-                    //         button = `<button id="${cardId}">Nominate me!</button>`
+                            button = `<button id="${cardId}">Nominate me!</button>`
                     //     }
 
                     // })
 
-                    for (let l = 0; l < array.length; l++) {
-                        const element = array[l];
+                    // for (let l = 0; l < array.length; l++) {
+                    //     const element = array[l];
                         
-                    }
+                    // }
 
 
 
 
 
 
-
+                    console.log(movieDBId);
                     // CREATE NEW MOVIE CARD
                     const newCard = `<div class="flex-center card movie-card" data-identifier='${movieDBId}'>
                                         <h3 id="movieNo">${title}</h2>
@@ -106,8 +105,14 @@ async function findMovie(event) {
                     const nominateButton = document.getElementById(`${cardId}`)
                     nominateButton.addEventListener('click', nominate)
 
+                
+                    console.log(resultBox.lastChild.dataset.identifier)
+                
+                
+                
+                
                 }
-                // console.log(movieIds);
+                console.log(resultBox);
             } else {
                 // DISPLAY ONLY IS NO MOVIE IS FOUND
                 const noMovie = `<div class="flex-center no-movie ">
@@ -120,7 +125,14 @@ async function findMovie(event) {
             }
 
 
+            
+
              // LOOP HERE AND ADD DISABLED PROPERTY AND CLASS TO THE DOM
+             movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
+                console.log(movieNominations);
+            
+            // movieNominations.forEach(())
+
 
 
         })
@@ -144,7 +156,7 @@ function nominate() {
 
     const movieID = movieIds[nomineeID];
 
-    // console.log('nominee: ', nominee);
+    console.log('nominee: ', nominee);
     // console.log(movieID);
     // console.log(nomineeTitle);
     // console.log(nomineeYear);
