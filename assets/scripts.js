@@ -10,7 +10,7 @@ const debounce = (callback, delay) => {
     return (...args) => {
         const next = () =>
             callback(...args);
-        clearTimeout(timeout); 
+        clearTimeout(timeout);
         timeout = setTimeout(next, delay)
     }
 }
@@ -66,23 +66,23 @@ async function findMovie(event) {
                         poster = "./assets/images/picture-not-available-clipart-12.jpg"
                     }
 
-                    
 
-                    let button = '';
+
+
 
                     // idArr.forEach(() => {
 
                     //     if (idArr[0] === movieDBId) {
                     //         button = `<button id="${cardId}" class="disabled" disabled>Nominated!</button>`
                     //     } else {
-                            button = `<button id="${cardId}">Nominate me!</button>`
+
                     //     }
 
                     // })
 
                     // for (let l = 0; l < array.length; l++) {
                     //     const element = array[l];
-                        
+
                     // }
 
 
@@ -96,7 +96,7 @@ async function findMovie(event) {
                                         <h3 id="movieNo">${title}</h2>
                                         <p id="movieYear">${year}</p>
                                         <img src="${poster}" alt="${title} poster" id="moviePoster">
-                                        ${button}
+                                        <button id="${cardId}">Nominate me!</button>
                                     </div>`
 
                     resultBox.insertAdjacentHTML('beforeend', newCard);
@@ -105,12 +105,28 @@ async function findMovie(event) {
                     const nominateButton = document.getElementById(`${cardId}`)
                     nominateButton.addEventListener('click', nominate)
 
-                
-                    console.log(resultBox.lastChild.dataset.identifier)
-                
-                
-                
-                
+                    const comparisonIdentifier = resultBox.lastChild.dataset.identifier;
+
+
+                    console.log(comparisonIdentifier)
+
+
+
+                    function findNominated() {
+                        for (let k = 0; k < movieNominations.length; k++) {
+                            if (comparisonIdentifier === movieNominations[k].movieID) {
+                                nominateButton.setAttribute("class", "disabled");
+                                nominateButton.setAttribute("disabled", "")
+                            }
+                            
+                        }
+
+                        
+                    }
+                    findNominated();
+
+
+
                 }
                 console.log(resultBox);
             } else {
@@ -125,13 +141,17 @@ async function findMovie(event) {
             }
 
 
-            
 
-             // LOOP HERE AND ADD DISABLED PROPERTY AND CLASS TO THE DOM
-             movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
-                console.log(movieNominations);
-            
+
+            // LOOP HERE AND ADD DISABLED PROPERTY AND CLASS TO THE DOM
+            movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
+            console.log(movieNominations);
+
             // movieNominations.forEach(())
+
+
+
+
 
 
 
