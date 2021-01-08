@@ -175,53 +175,79 @@ function nominate() {
         document.getElementById('nominationLimitBanner').classList.remove('hidden')
 
     } else {
-        const nominationCards = document.getElementById('movieNominationCards')
-        nominationCards.innerHTML = '';
-
-
-
-        for (let n = 0; n < movieNominations.length; n++) {
-
-
-            console.log("pickles");
-
-            const addNomineeCard =
-                `<div id="movieNominationCardNo" class="flex-center nomination-card card">
-                <h2 id="movieNominationNo">${movieNominations[n].title}</h2>
-                <p id="movieNominationNoYear">${movieNominations[n].year}</p>
-                <button>Remove Nomination</button>
-                </div>`
-
-            nominationCards.insertAdjacentHTML('beforeend', addNomineeCard)
-        }
-
-
-
-        console.log('movienominations: ', movieNominations);
-
 
         movieNominations.push(nomineeCard)
+// break out into its own function to also use on page loads.
+
+       
+
+
+        renderNominations();
+
         storage.setItem('movieNominations', JSON.stringify(movieNominations))
 
 
 
         nominee.getElementsByTagName('button')[0].setAttribute("class", "disabled")
         nominee.getElementsByTagName('button')[0].setAttribute("disabled", "")
+
+       
     }
 
 
 
 
 
-    console.log(movieNominations);
+    // console.log(movieNominations);
+}
+
+function renderNominations() {
+
+    const nominationCards = document.getElementById('movieNominationCards')
+    nominationCards.innerHTML = '';
+
+   
+
+
+    for (let n = 0; n < movieNominations.length; n++) {
+
+
+        console.log("pickles");
+
+        const addNomineeCard =
+            `<div id="movieNominationCardNo" class="flex-center nomination-card card">
+            <h2 id="movieNominationNo">${movieNominations[n].title}</h2>
+            <p id="movieNominationNoYear">${movieNominations[n].year}</p>
+            <button id='${movieNominations[n].movieID}'>Remove Nomination</button>
+            </div>`
+
+        nominationCards.insertAdjacentHTML('beforeend', addNomineeCard)
+    
+        console.log(movieNominations[n].movieID);
+
+        
+
+        // .addEventListener('click', function() {
+        //     console.log("potatoes");
+        // })
+
+    
+    }
+
+    console.log('movienominations: ', movieNominations);
+
+
+    
 }
 
 
-const searchBox = document.getElementById('searchBox')
+// on page load check if local storage exists. if it does then render movienominations,
+
 
 
 
 
 // the debounced Event handler that works on in the Search field
+const searchBox = document.getElementById('searchBox')
 const debouncedHandler = debounce(findMovie, 1000)
 searchBox.addEventListener('input', debouncedHandler)
