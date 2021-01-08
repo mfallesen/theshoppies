@@ -176,7 +176,7 @@ function nominate() {
 
     const movieID = movieIds[nomineeID];
 
-    console.log('nominee: ', nominee);
+    // console.log('nominee: ', nominee);
     // console.log(movieID);
     // console.log(nomineeTitle);
     // console.log(nomineeYear);
@@ -189,17 +189,32 @@ function nominate() {
         movieID: movieID,
     }
 
+    if (movieNominations.length > 4) {
+       
+    //    so user only has to close the banner once and not on each page reload
+    let rememberToggle = false
+    
+    // Failed to add banner here
+        console.log('More than 5');
+        document.getElementById('nominationLimitBanner').classList.remove('hidden')
 
-    console.log('movienominations: ', movieNominations);
+    
 
 
-    movieNominations.push(nomineeCard)
-    storage.setItem('movieNominations', JSON.stringify(movieNominations))
+    }else {
 
-
-
-    nominee.getElementsByTagName('button')[0].setAttribute("class", "disabled")
-    nominee.getElementsByTagName('button')[0].setAttribute("disabled", "")
+        
+        console.log('movienominations: ', movieNominations);
+        
+        
+        movieNominations.push(nomineeCard)
+        storage.setItem('movieNominations', JSON.stringify(movieNominations))
+        
+        
+        
+        nominee.getElementsByTagName('button')[0].setAttribute("class", "disabled")
+        nominee.getElementsByTagName('button')[0].setAttribute("disabled", "")
+    }
 
 
 
