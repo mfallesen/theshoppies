@@ -66,30 +66,6 @@ async function findMovie(event) {
                         poster = "./assets/images/picture-not-available-clipart-12.jpg"
                     }
 
-
-
-
-
-                    // idArr.forEach(() => {
-
-                    //     if (idArr[0] === movieDBId) {
-                    //         button = `<button id="${cardId}" class="disabled" disabled>Nominated!</button>`
-                    //     } else {
-
-                    //     }
-
-                    // })
-
-                    // for (let l = 0; l < array.length; l++) {
-                    //     const element = array[l];
-
-                    // }
-
-
-
-
-
-
                     console.log(movieDBId);
                     // CREATE NEW MOVIE CARD
                     const newCard = `<div class="flex-center card movie-card" data-identifier='${movieDBId}'>
@@ -118,10 +94,10 @@ async function findMovie(event) {
                                 nominateButton.setAttribute("class", "disabled");
                                 nominateButton.setAttribute("disabled", "")
                             }
-                            
+
                         }
 
-                        
+
                     }
                     findNominated();
 
@@ -190,28 +166,45 @@ function nominate() {
     }
 
     if (movieNominations.length > 4) {
-       
-    //    so user only has to close the banner once and not on each page reload
-    let rememberToggle = false
-    
-    // Failed to add banner here
+
+        //    so user only has to close the banner once and not on each page reload
+        let rememberToggle = false
+
+        // Failed to add banner here
         console.log('More than 5');
         document.getElementById('nominationLimitBanner').classList.remove('hidden')
 
-    
+    } else {
+        const nominationCards = document.getElementById('movieNominationCards')
+        nominationCards.innerHTML = '';
 
 
-    }else {
 
-        
+        for (let n = 0; n < movieNominations.length; n++) {
+
+
+            console.log("pickles");
+
+            const addNomineeCard =
+                `<div id="movieNominationCardNo" class="flex-center nomination-card card">
+                <h2 id="movieNominationNo">${movieNominations[n].title}</h2>
+                <p id="movieNominationNoYear">${movieNominations[n].year}</p>
+                <button>Remove Nomination</button>
+                </div>`
+
+            nominationCards.insertAdjacentHTML('beforeend', addNomineeCard)
+        }
+
+
+
         console.log('movienominations: ', movieNominations);
-        
-        
+
+
         movieNominations.push(nomineeCard)
         storage.setItem('movieNominations', JSON.stringify(movieNominations))
-        
-        
-        
+
+
+
         nominee.getElementsByTagName('button')[0].setAttribute("class", "disabled")
         nominee.getElementsByTagName('button')[0].setAttribute("disabled", "")
     }
