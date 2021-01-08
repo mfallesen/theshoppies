@@ -46,7 +46,9 @@ html {
     padding: 0;
     }
 
-
+html, body {
+    overflow-x: hidden;
+}
 
 body {
     background-color: #F4F5FA;
@@ -165,6 +167,33 @@ button:focus {
     outline-color: #BF0711;
 }
 
+/* Nomination Limit Banner CSS */
+#nominationLimitBanner {
+    overflow-x: hidden;    
+    background-color: #B7ECEC;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    width: 100%;
+}
+
+#nominationLimitBanner div {
+    width: 80%;
+}
+
+#nominationLimitBanner h3 {
+    padding-bottom: 12px;
+}
+
+#nominationLimitBanner p {
+    padding-bottom: 12px;
+}
+
+#closeBanner {
+    align-self: flex-end;
+    background-color: #47C1BF;
+    color: #003135;
+    width: 160px;
+}
 
 /* Search Results Specific CSS */
 .results {
