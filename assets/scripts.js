@@ -2,9 +2,16 @@ let movieNominations = [];
 let movieIds = [];
 const storage = window.localStorage;
 
+// CHECK TO SEE IF YOU HAVE NOMINATIONS AND LOAD ON PAGELOAD IF YOU DO.
+if (storage.movieNominations) {
+    movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
+    window.onload = renderNominations();
+}
+
 
 const searchBtn = document.getElementById('searchForMovie')
 
+// DEBOUNCE FUNCTION TO CONTROL SEARCH AS USER TYPES
 const debounce = (callback, delay) => {
     let timeout = null
     return (...args) => {
@@ -15,9 +22,11 @@ const debounce = (callback, delay) => {
     }
 }
 
+// ASYNC FUNCTION TO WAIT FOR API RESPONSE BEFORE DOING SOMETHING WITH THE RETURN DATA
 async function findMovie(event) {
     event.preventDefault()
 
+    // SET SEARCH RESULT DIV TO EMPTY AND POPULATE WITH RESULTS.
     const resultBox = document.getElementById('movie-results')
     resultBox.innerHTML = "";
 
@@ -38,12 +47,6 @@ async function findMovie(event) {
                 movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
                 console.log(movieNominations);
 
-                // let idArr = [];
-
-                // for (let j = 0; j < movieNominations.length; j++) {
-                //     idArr.push(movieNominations[j].movieID);
-
-                // }
 
 
 
@@ -106,7 +109,7 @@ async function findMovie(event) {
                 }
                 console.log(resultBox);
             } else {
-                // DISPLAY ONLY IS NO MOVIE IS FOUND
+                // DISPLAY ONLY IF NO MOVIE IS FOUND
                 const noMovie = `<div class="flex-center no-movie ">
                                     <h2>Sorry we cant seem to find the movie you're looking for. Please enjoy this gif of nicholas Cage instead
                                     </h2>
@@ -123,7 +126,7 @@ async function findMovie(event) {
             movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
             console.log(movieNominations);
 
-            // movieNominations.forEach(())
+
 
 
 
@@ -177,9 +180,9 @@ function nominate() {
     } else {
 
         movieNominations.push(nomineeCard)
-// break out into its own function to also use on page loads.
+        // break out into its own function to also use on page loads.
 
-       
+
 
 
         renderNominations();
@@ -191,7 +194,7 @@ function nominate() {
         nominee.getElementsByTagName('button')[0].setAttribute("class", "disabled")
         nominee.getElementsByTagName('button')[0].setAttribute("disabled", "")
 
-       
+
     }
 
 
@@ -206,7 +209,7 @@ function renderNominations() {
     const nominationCards = document.getElementById('movieNominationCards')
     nominationCards.innerHTML = '';
 
-   
+
 
 
     for (let n = 0; n < movieNominations.length; n++) {
@@ -215,29 +218,85 @@ function renderNominations() {
         console.log("pickles");
 
         const addNomineeCard =
-            `<div id="movieNominationCardNo" class="flex-center nomination-card card">
+            `<div class="flex-center nomination-card card">
             <h2 id="movieNominationNo">${movieNominations[n].title}</h2>
             <p id="movieNominationNoYear">${movieNominations[n].year}</p>
             <button id='${movieNominations[n].movieID}'>Remove Nomination</button>
             </div>`
 
         nominationCards.insertAdjacentHTML('beforeend', addNomineeCard)
-    
-        console.log(movieNominations[n].movieID);
 
-        
 
-        // .addEventListener('click', function() {
-        //     console.log("potatoes");
-        // })
 
-    
+        // GENERATE EVENT LISTENERS FOR  REMOVE NOMINATION BUTTON
+        const nominationEvent = document.getElementById(movieNominations[n].movieID)
+        nominationEvent.addEventListener('click', function () {
+
+            console.log("id number: ", movieNominations[n].movieID);
+
+
+            // REMOVE FROM DOM
+            // const deNominated = document.getElementById(`${movieNominations[n].movieID}`).parentElement
+            // deNominated.parentNode.removeChild(deNominated);
+            // console.log("denominated : ", deNominated);
+
+            const filtered = document.getElementById(movieNominations[n].movieID)
+            console.log("outside", filtered.id);
+            
+
+            // if statement to remove movie nomination from the stored array and update. 
+
+            if(filtered.id)  
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+            // function nominationFilter() {
+            //     for (let k = 0; k < movieNominations.length; k++) {
+            //         console.log("Nominations", movieNominations[k]);
+            //         console.log("nom filter= ", filtered);
+            //         if (movieNominations[k].movieID === filtered) {
+            //             movieNominations.splice(k, 1)
+            //             console.log(" check it", movieNominations[k].movieID);
+            //         }
+            //         console.log('delete: ', movieNominations);
+            //     }
+            //     return movieNominations
+
+            // }
+            // nominationFilter();
+            // console.log(movieNominations);
+
+
+
+
+
+
+
+
+            storage.setItem('movieNominations', JSON.stringify(movieNominations))
+        })
+
+
     }
 
     console.log('movienominations: ', movieNominations);
 
 
-    
+
 }
 
 
