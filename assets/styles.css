@@ -147,14 +147,26 @@ button:focus {
 }
 
 .movie-nominations h2 {
+    
     text-align: center;
-    align-self: center;
+    
     padding: 12px;
 }
 
 .nomination-card {
     flex-direction: column;
     height: 200px;
+    width: 200px;
+}
+
+#movieNominationCards div{
+    min-width: 0;
+}
+
+.nomination-card h2 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .nomination-card p {
@@ -208,16 +220,21 @@ button:focus {
 }
 
 .movie-card {
-    flex-flow: column wrap;
-    align-self: center;
+    flex-flow: column nowrap;
+    /* align-self: center; */
     height: 420px;
     width: 250px;
+    min-width: 0;
 }
 .movie-card h3 {
     align-content: center;
-   
     text-align: center;
     padding: 4px;
+
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .movie-card p {
