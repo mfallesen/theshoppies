@@ -13,6 +13,24 @@
         <p>The only award show that matters.</p>
     </header>
 
+    
+    <div id="nominationLimitBanner" class="flex-center hidden">
+        <div class="flex-center col-wrap">
+            <h3>You can only nominate up to 5 movies!</h3>
+            <p>If you want to nominate another movie please remove an existing nomination.</p>
+            <button id="closeBanner">Close Banner</button>
+        </div>
+    </div>
+    
+    <aside class="flex-center col-wrap movie-nominations">
+        <h2>And The Nominees Are:</h2>
+        <!-- Nominated Movies should appear on top of the page as a card these should be stored as an array of objects and displayed when called-->
+        <div class="flex-center row-wrap" id="movieNominationCards">
+            
+            
+        </div>
+        
+    </aside>
     <form class="flex-center">
         <div class="search-bar" id="movieSearch">
             <label for="searchBox">Find A Movie:</label>
@@ -21,25 +39,6 @@
 
         </div>
     </form>
-
-    <div id="nominationLimitBanner" class="flex-center hidden">
-        <div class="flex-center col-wrap">
-                <h3>You can only nominate up to 5 movies!</h3>
-                <p>If you want to nominate another movie please remove an existing nomination.</p>
-                <button id="closeBanner">Close Banner</button>
-        </div>
-    </div>
-
-
-    <aside class="flex-center col-wrap movie-nominations">
-        <h2>And The Nominees Are:</h2>
-        <!-- Nominated Movies should appear on top of the page as a card these should be stored as an array of objects and displayed when called-->
-        <div class="flex-center row-wrap" id="movieNominationCards">
-
-
-        </div>
-
-    </aside>
 
     <section class="flex-center col-wrap results">
         <h2>Search Results</h2>
