@@ -38,7 +38,6 @@ async function findMovie(event) {
         .then(response => response.json())
         .then((data) => {
             let options = data.Search;
-            console.log(options);
 
             if (options != undefined) {
                 // CLEAR EXISTING ID LIST
@@ -46,9 +45,6 @@ async function findMovie(event) {
 
                 movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
                 console.log(movieNominations);
-
-
-
 
                 // LOOP THROUGH OPTIONS AND DISPLAY A CARD FOR EACH
                 for (let i = 0; i < options.length; i++) {
@@ -86,28 +82,17 @@ async function findMovie(event) {
 
                     const comparisonIdentifier = resultBox.lastChild.dataset.identifier;
 
-
-                    console.log(comparisonIdentifier)
-
-
-
+                    // DISABLE NOMINATION BUTTON ON PAGE LOAD IF MOVIE HAD BEEN NOMINATED
                     function findNominated() {
                         for (let k = 0; k < movieNominations.length; k++) {
                             if (comparisonIdentifier === movieNominations[k].movieID) {
                                 nominateButton.setAttribute("class", "disabled");
                                 nominateButton.setAttribute("disabled", "")
                             }
-
                         }
-
-
                     }
                     findNominated();
-
-
-
                 }
-                console.log(resultBox);
             } else {
                 // DISPLAY ONLY IF NO MOVIE IS FOUND
                 const noMovie = `<div class="flex-center no-movie ">
@@ -119,32 +104,17 @@ async function findMovie(event) {
                 resultBox.insertAdjacentHTML('beforeend', noMovie)
             }
 
-
-
-
-            // LOOP HERE AND ADD DISABLED PROPERTY AND CLASS TO THE DOM
             movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
-            console.log(movieNominations);
-
-
-
-
-
-
-
-
-
         })
         .catch((err) => {
             console.error("Error: ", err);
         })
 }
 
-// Nomination functions
+// NOMINATION FUNCTIONS
 function nominate() {
 
-    // console.log(storage.getItem('movieNominations'));
-
+    // BUILD OBJECT TO STORE AS NOMINATION
     movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
     const nominee = this.parentElement;
     const nomineeTitle = nominee.getElementsByTagName('h3')[0].childNodes[0].data;
@@ -155,12 +125,6 @@ function nominate() {
 
     const movieID = movieIds[nomineeID];
 
-    // console.log('nominee: ', nominee);
-    // console.log(movieID);
-    // console.log(nomineeTitle);
-    // console.log(nomineeYear);
-    // console.log(nomineePoster);
-
     const nomineeCard = {
         title: nomineeTitle,
         year: nomineeYear,
@@ -168,40 +132,22 @@ function nominate() {
         movieID: movieID,
     }
 
+    // CHECK TO SEE IF USER ALREADY HAS 5 NOMINATIONS 
     if (movieNominations.length > 4) {
-
-        //    so user only has to close the banner once and not on each page reload
-        let rememberToggle = false
-
-        // Failed to add banner here
-        console.log('More than 5');
+        // DISPLAY BANNER TO USER
         document.getElementById('nominationLimitBanner').classList.remove('hidden')
-
     } else {
-
+        // ADD NOMINATED CARD TO ARRAY
         movieNominations.push(nomineeCard)
-        // break out into its own function to also use on page loads.
-
-
-
-
+        
         renderNominations();
 
         storage.setItem('movieNominations', JSON.stringify(movieNominations))
 
-
-
+        // DISABLE NOMINATION BUTTON ON MOVIE
         nominee.getElementsByTagName('button')[0].setAttribute("class", "disabled")
         nominee.getElementsByTagName('button')[0].setAttribute("disabled", "")
-
-
     }
-
-
-
-
-
-    // console.log(movieNominations);
 }
 
 function renderNominations() {
@@ -209,14 +155,9 @@ function renderNominations() {
     const nominationCards = document.getElementById('movieNominationCards')
     nominationCards.innerHTML = '';
 
-
-
-
+    // LOOP THROUGH NOMINATED MOVIES AND DISPLAY THEM TO USER
     for (let n = 0; n < movieNominations.length; n++) {
-
-
-        console.log("pickles");
-
+        // ADD NOMINEE CARDS TO THE DOM
         const addNomineeCard =
             `<div class="flex-center nomination-card card">
             <h2 id="movieNominationNo">${movieNominations[n].title}</h2>
@@ -226,49 +167,27 @@ function renderNominations() {
 
         nominationCards.insertAdjacentHTML('beforeend', addNomineeCard)
 
-
-
-        // GENERATE EVENT LISTENERS FOR  REMOVE NOMINATION BUTTON
+        // GENERATE EVENT LISTENERS TO  REMOVE NOMINATIONS
         const nominationEvent = document.getElementById(movieNominations[n].movieID)
         nominationEvent.addEventListener('click', function () {
 
             console.log("id number: ", movieNominations[n].movieID);
-
-
-            // REMOVE FROM DOM
-            const deNominated = document.getElementById(`${movieNominations[n].movieID}`).parentElement
-            deNominated.parentNode.removeChild(deNominated);
-            // console.log("denominated : ", deNominated);
-
-
-
+            
             // REMOVE FROM MOVIENOMINATIONS 
             const filtered = document.getElementById(movieNominations[n].movieID)
-            console.log("outside", filtered.id);
-
+            
             if (filtered.id === movieNominations[n].movieID) {
                 movieNominations.splice(n, 1);   
             }
 
-
+            // REMOVE FROM DOM
+            const deNominated = document.getElementById(`${movieNominations[n].movieID}`).parentElement
+            deNominated.parentNode.removeChild(deNominated);
 
             storage.setItem('movieNominations', JSON.stringify(movieNominations))
         })
-
-
     }
-
-    console.log('movienominations: ', movieNominations);
-
-
-
 }
-
-
-// on page load check if local storage exists. if it does then render movienominations,
-
-
-
 
 
 // the debounced Event handler that works on in the Search field
