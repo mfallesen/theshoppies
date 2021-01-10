@@ -236,54 +236,19 @@ function renderNominations() {
 
 
             // REMOVE FROM DOM
-            // const deNominated = document.getElementById(`${movieNominations[n].movieID}`).parentElement
-            // deNominated.parentNode.removeChild(deNominated);
+            const deNominated = document.getElementById(`${movieNominations[n].movieID}`).parentElement
+            deNominated.parentNode.removeChild(deNominated);
             // console.log("denominated : ", deNominated);
 
+
+
+            // REMOVE FROM MOVIENOMINATIONS 
             const filtered = document.getElementById(movieNominations[n].movieID)
             console.log("outside", filtered.id);
-            
 
-            // if statement to remove movie nomination from the stored array and update. 
-
-            if(filtered.id)  
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-           
-            // function nominationFilter() {
-            //     for (let k = 0; k < movieNominations.length; k++) {
-            //         console.log("Nominations", movieNominations[k]);
-            //         console.log("nom filter= ", filtered);
-            //         if (movieNominations[k].movieID === filtered) {
-            //             movieNominations.splice(k, 1)
-            //             console.log(" check it", movieNominations[k].movieID);
-            //         }
-            //         console.log('delete: ', movieNominations);
-            //     }
-            //     return movieNominations
-
-            // }
-            // nominationFilter();
-            // console.log(movieNominations);
-
-
-
-
-
+            if (filtered.id === movieNominations[n].movieID) {
+                movieNominations.splice(n, 1);   
+            }
 
 
 
