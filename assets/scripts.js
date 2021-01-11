@@ -6,6 +6,7 @@ const storage = window.localStorage;
 if (storage.movieNominations) {
     movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
     window.onload = renderNominations();
+    document.getElementById('nominationContainer').classList.remove("hidden")
 }
 
 
@@ -136,6 +137,7 @@ function nominate() {
     if (movieNominations.length > 4) {
         // DISPLAY BANNER TO USER
         document.getElementById('nominationLimitBanner').classList.remove('hidden')
+        document.getElementById('nominationLimitBanner').scrollIntoView({behavior:"smooth"});
     } else {
         // ADD NOMINATED CARD TO ARRAY
         movieNominations.push(nomineeCard)
@@ -176,15 +178,29 @@ function renderNominations() {
             // REMOVE FROM MOVIENOMINATIONS 
             const filtered = document.getElementById(movieNominations[n].movieID)
             
+
+            console.log(filtered);
+
             if (filtered.id === movieNominations[n].movieID) {
                 movieNominations.splice(n, 1);   
             }
 
             // REMOVE FROM DOM
-            const deNominated = document.getElementById(`${movieNominations[n].movieID}`).parentElement
+            try {
+                const deNominated = document.getElementById(`${movieNominations[n].movieID}`).parentElement
             deNominated.parentNode.removeChild(deNominated);
+            } catch (error) {
+                console.error(error);
+                if (error instanceof TypeError) {
+                    console.log("TypeError: ", error);
+                }
+            } finally {
 
-            storage.setItem('movieNominations', JSON.stringify(movieNominations))
+                renderNominations();
+
+                storage.setItem('movieNominations', JSON.stringify(movieNominations))
+            }
+
         })
     }
 }
