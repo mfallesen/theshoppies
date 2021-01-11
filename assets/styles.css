@@ -129,12 +129,14 @@ button:focus {
 
 .search-bar {
     padding: 8px;
+    margin-top: 40px;
 }
 
 .search-bar input {
     padding: 8px;
     font-size: 1.2em;
     border-radius: 8px;
+    margin-bottom: 8px;
 }
 
 .search-bar label {
@@ -181,8 +183,8 @@ button:focus {
 }
 
 .nomination-card button {
-    background-color: #FEAD9A;
-    color: #BF0711;
+    background-color: #DE3618;
+    color: white;
     outline-color: #BF0711;
 }
 
@@ -192,7 +194,10 @@ button:focus {
     background-color: #B7ECEC;
     padding-top: 24px;
     padding-bottom: 24px;
-    width: 100%;
+    width: 90%;
+    border-radius: 8px;
+    border-top: solid 8px #47C1BF ;
+    
 }
 
 #nominationLimitBanner div {
@@ -217,7 +222,7 @@ button:focus {
 /* Search Results Specific CSS */
 .results {
     padding: 12px;
-    margin-top: 12px;
+    margin-top: 28px;
 
 }
 
@@ -288,6 +293,7 @@ button:focus {
 footer {
     flex-direction: column;
     padding: 40px;
+    
 }
 
 footer h3 {
@@ -305,6 +311,8 @@ footer img {
 }
 
 footer p {
+    border-radius: 8px;
+    border-top: solid 8px #EEC200 ;
     display: flex;
     justify-content: center;
     background-color: #FFEA8A;
