@@ -9,8 +9,8 @@ if (storage.movieNominations) {
     document.getElementById('nominationContainer').classList.remove("hidden")
 }
 
-
-const searchBtn = document.getElementById('searchForMovie')
+// No longer in use
+// const searchBtn = document.getElementById('searchForMovie')
 
 // DEBOUNCE FUNCTION TO CONTROL SEARCH AS USER TYPES
 const debounce = (callback, delay) => {
@@ -46,6 +46,10 @@ async function findMovie(event) {
 
                 movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
                 console.log(movieNominations);
+
+document.getElementsByClassName('results')[0].classList.remove('hidden');
+
+                
 
                 // LOOP THROUGH OPTIONS AND DISPLAY A CARD FOR EACH
                 for (let i = 0; i < options.length; i++) {
