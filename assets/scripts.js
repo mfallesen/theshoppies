@@ -26,6 +26,7 @@ const debounce = (callback, delay) => {
 // ASYNC FUNCTION TO WAIT FOR API RESPONSE BEFORE DOING SOMETHING WITH THE RETURN DATA
 async function findMovie(event) {
     event.preventDefault()
+    document.getElementById('nominationContainer').classList.remove("hidden")
 
     // SET SEARCH RESULT DIV TO EMPTY AND POPULATE WITH RESULTS.
     const resultBox = document.getElementById('movie-results')
@@ -146,9 +147,10 @@ function nominate() {
         // ADD NOMINATED CARD TO ARRAY
         movieNominations.push(nomineeCard)
         
+        storage.setItem('movieNominations', JSON.stringify(movieNominations))
+        
         renderNominations();
 
-        storage.setItem('movieNominations', JSON.stringify(movieNominations))
 
         // DISABLE NOMINATION BUTTON ON MOVIE
         nominee.getElementsByTagName('button')[0].setAttribute("class", "disabled")
