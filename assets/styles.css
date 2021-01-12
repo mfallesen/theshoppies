@@ -100,7 +100,7 @@ button:focus {
     border: 1px solid #B3BCF5;
     border-radius: 8px;
     box-shadow: 4px 4px 4px  #C4CDD5 ;
-    margin: 4px;
+    margin: 12px;
 }
 
 .hidden {
@@ -129,12 +129,14 @@ button:focus {
 
 .search-bar {
     padding: 8px;
+    margin-top: 40px;
 }
 
 .search-bar input {
     padding: 8px;
     font-size: 1.2em;
     border-radius: 8px;
+    margin-bottom: 8px;
 }
 
 .search-bar label {
@@ -154,9 +156,17 @@ button:focus {
 }
 
 .nomination-card {
+    background-color: #F4F5FA;
     flex-direction: column;
+    justify-content: space-evenly;
     height: 200px;
     width: 200px;
+    transition: transform 0.2s ease-in;
+}
+.nomination-card:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 #movieNominationCards div{
@@ -174,8 +184,8 @@ button:focus {
 }
 
 .nomination-card button {
-    background-color: #FEAD9A;
-    color: #BF0711;
+    background-color: #DE3618;
+    color: white;
     outline-color: #BF0711;
 }
 
@@ -185,7 +195,10 @@ button:focus {
     background-color: #B7ECEC;
     padding-top: 24px;
     padding-bottom: 24px;
-    width: 100%;
+    width: 90%;
+    border-radius: 8px;
+    border-top: solid 8px #47C1BF ;
+    
 }
 
 #nominationLimitBanner div {
@@ -210,7 +223,7 @@ button:focus {
 /* Search Results Specific CSS */
 .results {
     padding: 12px;
-    margin-top: 12px;
+    margin-top: 28px;
 
 }
 
@@ -220,12 +233,20 @@ button:focus {
 }
 
 .movie-card {
+    background-color: #F4F5FA;
     flex-flow: column nowrap;
-    /* align-self: center; */
     height: 420px;
     width: 250px;
     min-width: 0;
+    transition: transform 0.2s ease-in;
 }
+
+.movie-card:hover {
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+}
+
 .movie-card h3 {
     align-content: center;
     text-align: center;
@@ -273,6 +294,7 @@ button:focus {
 footer {
     flex-direction: column;
     padding: 40px;
+    
 }
 
 footer h3 {
@@ -290,6 +312,8 @@ footer img {
 }
 
 footer p {
+    border-radius: 8px;
+    border-top: solid 8px #EEC200 ;
     display: flex;
     justify-content: center;
     background-color: #FFEA8A;

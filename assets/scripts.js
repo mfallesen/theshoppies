@@ -6,10 +6,11 @@ const storage = window.localStorage;
 if (storage.movieNominations) {
     movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
     window.onload = renderNominations();
+    document.getElementById('nominationContainer').classList.remove("hidden")
 }
 
-
-const searchBtn = document.getElementById('searchForMovie')
+// No longer in use
+// const searchBtn = document.getElementById('searchForMovie')
 
 // DEBOUNCE FUNCTION TO CONTROL SEARCH AS USER TYPES
 const debounce = (callback, delay) => {
@@ -25,6 +26,7 @@ const debounce = (callback, delay) => {
 // ASYNC FUNCTION TO WAIT FOR API RESPONSE BEFORE DOING SOMETHING WITH THE RETURN DATA
 async function findMovie(event) {
     event.preventDefault()
+    document.getElementById('nominationContainer').classList.remove("hidden")
 
     // SET SEARCH RESULT DIV TO EMPTY AND POPULATE WITH RESULTS.
     const resultBox = document.getElementById('movie-results')
@@ -45,6 +47,10 @@ async function findMovie(event) {
 
                 movieNominations = JSON.parse(storage.getItem('movieNominations') || '[]')
                 console.log(movieNominations);
+
+document.getElementsByClassName('results')[0].classList.remove('hidden');
+
+                
 
                 // LOOP THROUGH OPTIONS AND DISPLAY A CARD FOR EACH
                 for (let i = 0; i < options.length; i++) {
@@ -136,13 +142,15 @@ function nominate() {
     if (movieNominations.length > 4) {
         // DISPLAY BANNER TO USER
         document.getElementById('nominationLimitBanner').classList.remove('hidden')
+        document.getElementById('nominationLimitBanner').scrollIntoView({behavior:"smooth"});
     } else {
         // ADD NOMINATED CARD TO ARRAY
         movieNominations.push(nomineeCard)
         
+        storage.setItem('movieNominations', JSON.stringify(movieNominations))
+        
         renderNominations();
 
-        storage.setItem('movieNominations', JSON.stringify(movieNominations))
 
         // DISABLE NOMINATION BUTTON ON MOVIE
         nominee.getElementsByTagName('button')[0].setAttribute("class", "disabled")
@@ -176,15 +184,29 @@ function renderNominations() {
             // REMOVE FROM MOVIENOMINATIONS 
             const filtered = document.getElementById(movieNominations[n].movieID)
             
+
+            console.log(filtered);
+
             if (filtered.id === movieNominations[n].movieID) {
                 movieNominations.splice(n, 1);   
             }
 
             // REMOVE FROM DOM
-            const deNominated = document.getElementById(`${movieNominations[n].movieID}`).parentElement
+            try {
+                const deNominated = document.getElementById(`${movieNominations[n].movieID}`).parentElement
             deNominated.parentNode.removeChild(deNominated);
+            } catch (error) {
+                console.error(error);
+                if (error instanceof TypeError) {
+                    console.log("TypeError: ", error);
+                }
+            } finally {
 
-            storage.setItem('movieNominations', JSON.stringify(movieNominations))
+                renderNominations();
+
+                storage.setItem('movieNominations', JSON.stringify(movieNominations))
+            }
+
         })
     }
 }
