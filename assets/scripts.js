@@ -33,7 +33,7 @@ async function findMovie(event) {
     resultBox.innerHTML = "";
 
     let movie = document.getElementById("searchBox").value
-    const query_url = `http://www.omdbapi.com/?apikey=2afe3024&s=${movie}&type=movie`
+    const query_url = `https://www.omdbapi.com/?apikey=2afe3024&s=${movie}&type=movie`
 
 
     fetch(query_url)
